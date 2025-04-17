@@ -3,6 +3,7 @@ import 'package:robotics_app/feature/spalsh/presentation/view/widget/splash_view
 
 class SplashView extends StatelessWidget {
 const SplashView({ super.key });
+static const String routeName = '/splash_view';
 @override
 Widget build(BuildContext context) {
 return Scaffold(
