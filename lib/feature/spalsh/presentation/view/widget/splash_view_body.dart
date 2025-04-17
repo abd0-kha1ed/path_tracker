@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:robotics_app/core/utils/app_images.dart';
+import 'package:robotics_app/feature/connection/presentation/view/connection_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -21,7 +22,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 800),
     )..repeat(reverse: true);
 
     _animation = Tween<double>(begin: 0.9, end: 1.1).animate(
@@ -29,10 +30,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
 
     Timer(const Duration(seconds: 3), () {
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => const HomePage()),
-      // );
+      Navigator.pushReplacementNamed(context, ConnectionView.routeName);
     });
   }
 
