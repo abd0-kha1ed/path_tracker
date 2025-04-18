@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-class ConnectScreen extends StatefulWidget {
+class ConnectionViewBody extends StatefulWidget {
+  const ConnectionViewBody({super.key});
+
   @override
-  _ConnectScreenState createState() => _ConnectScreenState();
+  _ConnectionViewBodyState createState() => _ConnectionViewBodyState();
 }
 
-class _ConnectScreenState extends State<ConnectScreen> {
+class _ConnectionViewBodyState extends State<ConnectionViewBody> {
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
   BluetoothConnection? _connection;
   bool isConnecting = false;
