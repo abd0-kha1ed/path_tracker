@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-class ConnectScreen extends StatefulWidget {
+class ConnectionViewBody extends StatefulWidget {
   @override
-  _ConnectScreenState createState() => _ConnectScreenState();
+  _ConnectionViewBodyState createState() => _ConnectionViewBodyState();
 }
 
-class _ConnectScreenState extends State<ConnectScreen> {
+class _ConnectionViewBodyState extends State<ConnectionViewBody> {
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
   BluetoothConnection? _connection;
   bool isConnecting = false;
@@ -112,9 +112,9 @@ class _ConnectScreenState extends State<ConnectScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
+                  // CircularProgressIndicator(
+                  //   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  // ),
                   SizedBox(height: 20),
                   Text(
                     "Tap to Connect",
