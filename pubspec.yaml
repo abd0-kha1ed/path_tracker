@@ -31,9 +31,14 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.0
   flutter_bluetooth_serial: ^0.4.0
   google_fonts: ^6.2.1
+<<<<<<< HEAD
   syncfusion_flutter_gauges: ^29.1.38
+=======
+  permission_handler: ^12.0.0+1
+>>>>>>> 2e07e575b852caa9aed3d6ab50afbc2f923c24be
 
 dev_dependencies:
   flutter_lints: ^5.0.0

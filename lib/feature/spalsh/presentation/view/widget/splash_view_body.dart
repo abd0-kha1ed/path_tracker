@@ -30,7 +30,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, ConnectionView.routeName);
+      Navigator.pushReplacementNamed(
+          context, BluetoothConnectionView.routeName);
     });
   }
 

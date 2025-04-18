@@ -12,6 +12,7 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
     case SplashView.routeName:
       return MaterialPageRoute(builder: (_) => const SplashView());
+<<<<<<< HEAD
     case ConnectionView.routeName:
       return MaterialPageRoute(builder: (_) => const ConnectionView());
     case HomeView.routeName:
@@ -26,6 +27,10 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const MembersView());
     case CameraView.routeName:
       return MaterialPageRoute(builder: (_) => const CameraView());
+=======
+    case BluetoothConnectionView.routeName:
+      return MaterialPageRoute(builder: (_) => const BluetoothConnectionView());
+>>>>>>> 2e07e575b852caa9aed3d6ab50afbc2f923c24be
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
