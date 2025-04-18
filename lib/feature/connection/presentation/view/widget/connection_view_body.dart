@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:robotics_app/feature/home/presentation/view/home_view.dart';
 import '../../manager/cubit/bluetooth_cubit.dart';
 
 class BluetoothConnectViewBody extends StatefulWidget {
   const BluetoothConnectViewBody({super.key});
 
-<<<<<<< HEAD
-class ConnectionViewBody extends StatefulWidget {
-  @override
-  _ConnectionViewBodyState createState() => _ConnectionViewBodyState();
-}
-
-class _ConnectionViewBodyState extends State<ConnectionViewBody> {
-  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-  BluetoothConnection? _connection;
-  bool isConnecting = false;
-=======
   @override
   State<BluetoothConnectViewBody> createState() =>
       _BluetoothConnectViewBodyState();
@@ -25,7 +15,6 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _scaleAnimation;
->>>>>>> 2e07e575b852caa9aed3d6ab50afbc2f923c24be
 
   @override
   void initState() {
@@ -57,38 +46,6 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text("Bluetooth Control"),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              width: 250,
-              height: 250,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // CircularProgressIndicator(
-                  //   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  // ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Tap to Connect",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ],
-=======
     return BlocBuilder<BluetoothCubit, BluetoothState>(
       builder: (context, state) {
         String displayText = "Press to connect";
@@ -103,8 +60,11 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
         } else if (state is BluetoothConnected) {
           displayText = "Connected ";
           isConnecting = false;
-          containerColor = Colors.greenAccent; // Change color when connected
-          _pulseController.stop(); // Stop pulse animation
+          containerColor = Colors.greenAccent;
+          // Change color when connected
+          _pulseController.stop();
+          Navigator.pushReplacementNamed(context, HomeView.routeName);
+          // Stop pulse animation
         } else if (state is BluetoothError) {
           displayText = "Connection Failed ";
           isConnecting = false;
@@ -154,7 +114,6 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
                     ),
                   ),
                 ),
->>>>>>> 2e07e575b852caa9aed3d6ab50afbc2f923c24be
               ),
               const SizedBox(height: 30),
               if (state is BluetoothConnecting)

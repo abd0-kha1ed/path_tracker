@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:robotics_app/constant.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class SpeedometerPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _SpeedometerPageState extends State<SpeedometerPage> {
   Future<void> connectToRobot() async {
     try {
       // Replace this with your robot's Bluetooth address
-      String robotAddress = "00:14:06:16:8A:69"; // Example address
+      String robotAddress = hc05Address; // Example address
       robotConnection = await BluetoothConnection.toAddress(robotAddress);
       print("Connected to the robot");
 

@@ -5,33 +5,29 @@ import 'package:robotics_app/constant.dart';
 
 part 'bluetooth_state.dart';
 
-
-
 class BluetoothCubit extends Cubit<BluetoothState> {
   BluetoothConnection? _connection;
 
   BluetoothCubit() : super(BluetoothInitial());
 
-
   Future<void> connectToRobot() async {
-  await requestBluetoothPermissions(); 
+    await requestBluetoothPermissions();
 
-  emit(BluetoothConnecting());
-  print("🔄 Trying to connect to $hc05Address...");
+    emit(BluetoothConnecting());
+    print("🔄 Trying to connect to $hc05Address...");
 
-  try {
-    _connection = await BluetoothConnection.toAddress(hc05Address);
-    print("✅ Connected to ${_connection!.isConnected}");
+    try {
+      _connection = await BluetoothConnection.toAddress(hc05Address);
+      print("✅ Connected to ${_connection!.isConnected}");
 
-    emit(BluetoothConnected(
-      BluetoothDevice(address: hc05Address, name: "HC-05"),
-    ));
-  } catch (e) {
-    print("❌ Connection failed: $e");
-    emit(BluetoothError("فشل الاتصال: ${e.toString()}"));
+      emit(BluetoothConnected(
+        BluetoothDevice(address: hc05Address, name: "HC-05"),
+      ));
+    } catch (e) {
+      print("❌ Connection failed: $e");
+      emit(BluetoothError("فشل الاتصال: ${e.toString()}"));
+    }
   }
-}
-
 
   BluetoothConnection? get connection => _connection;
 
@@ -42,16 +38,15 @@ class BluetoothCubit extends Cubit<BluetoothState> {
   }
 
   Future<void> requestBluetoothPermissions() async {
-  Map<Permission, PermissionStatus> statuses = await [
-    Permission.bluetooth,
-    Permission.bluetoothConnect,
-    Permission.bluetoothScan,
-    Permission.location,
-  ].request();
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.bluetooth,
+      Permission.bluetoothConnect,
+      Permission.bluetoothScan,
+      Permission.location,
+    ].request();
 
-  if (statuses.values.any((status) => status.isPermanentlyDenied)) {
-    openAppSettings();
+    if (statuses.values.any((status) => status.isPermanentlyDenied)) {
+      openAppSettings();
+    }
   }
-}
-
 }
