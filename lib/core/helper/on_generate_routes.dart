@@ -6,10 +6,10 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
     case SplashView.routeName:
       return MaterialPageRoute(builder: (_) => const SplashView());
-    case ConnectionView.routeName:
-      return MaterialPageRoute(builder: (_) => const ConnectionView());
-      
-      default:
-        return MaterialPageRoute(builder: (context)=> const Scaffold());
+    case BluetoothConnectionView.routeName:
+      return MaterialPageRoute(builder: (_) => const BluetoothConnectionView());
+
+    default:
+      return MaterialPageRoute(builder: (context) => const Scaffold());
   }
 }

@@ -4,6 +4,7 @@ import 'package:robotics_app/feature/spalsh/presentation/view/splash_view.dart';
 
 void main() {
   runApp(RoboticsApp());
+  
 }
 
 class RoboticsApp extends StatelessWidget {
