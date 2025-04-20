@@ -10,12 +10,25 @@ class HomeView extends StatelessWidget {
   
 
   @override
-  Widget build(BuildContext context) {
-    final BluetoothConnection connection =
-        ModalRoute.of(context)!.settings.arguments as BluetoothConnection;
-    return Scaffold(
-      appBar: CustomAppBar(text: 'Home', icon: Icons.home),
-      body: HomeViewBody(connection: connection),
+Widget build(BuildContext context) {
+  final args = ModalRoute.of(context)?.settings.arguments;
+
+  if (args == null || args is! BluetoothConnection) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          "❌ No Bluetooth connection provided.",
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
     );
   }
+
+  final BluetoothConnection connection = args;
+
+  return Scaffold(
+    appBar: CustomAppBar(text: 'Home', icon: Icons.home),
+    body: HomeViewBody(connection: connection),
+  );
+}
 }
