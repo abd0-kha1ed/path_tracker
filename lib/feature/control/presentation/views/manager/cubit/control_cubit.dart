@@ -17,9 +17,9 @@ class ControlCubit extends Cubit<ControlState> {
     try {
       connection.output.add(Uint8List.fromList(utf8.encode(command)));
       connection.output.allSent;
-      print("📤 Command sent: $command");
+      print("Command sent: $command");
     } catch (e) {
-      print("⚠️ Failed to send command: $e");
+      print("Failed to send command: $e");
     }
   }
 
@@ -35,6 +35,6 @@ class ControlCubit extends Cubit<ControlState> {
 
   void reverseRobot() {
     _sendCommand("REVERSE");
-    emit(state.copyWith(isRobotRunning: true)); // أو حسب المنطق المطلوب
+    emit(state.copyWith(isRobotRunning: true)); 
   }
 }

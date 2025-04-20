@@ -89,7 +89,7 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
               GestureDetector(
                 onTap: () {
                   if (state is! BluetoothConnecting) {
-                    context.read<BluetoothCubit>().connectToRobot();
+                    context.read<BluetoothCubit>().connectToRobot(context);
                   }
                 },
                 child: ScaleTransition(
