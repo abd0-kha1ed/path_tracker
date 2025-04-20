@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:robotics_app/core/utils/app_images.dart';
-import 'package:robotics_app/feature/connection/presentation/view/connection_view.dart';
+import 'package:robotics_app/feature/home/presentation/view/home_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -30,8 +30,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(
-          context, BluetoothConnectionView.routeName);
+      Navigator.pushReplacementNamed(context, HomeView.routeName);
     });
   }
 

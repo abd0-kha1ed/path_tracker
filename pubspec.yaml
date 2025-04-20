@@ -29,13 +29,14 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
+  dartz: ^0.10.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_bluetooth_serial: ^0.4.0
   google_fonts: ^6.2.1
-  syncfusion_flutter_gauges: ^29.1.38
   permission_handler: ^12.0.0+1
+  syncfusion_flutter_gauges: ^29.1.38
 
 dev_dependencies:
   flutter_lints: ^5.0.0
