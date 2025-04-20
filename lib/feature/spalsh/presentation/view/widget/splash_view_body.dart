@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:robotics_app/core/utils/app_images.dart';
 import 'package:robotics_app/feature/home/presentation/view/home_view.dart';
@@ -30,7 +29,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, HomeView.routeName);
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomeView.routeName, (route) => false);
     });
   }
 

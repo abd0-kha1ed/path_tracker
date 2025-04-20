@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:robotics_app/feature/camera/presentation/views/camera_view.dart';
 import 'package:robotics_app/feature/control/presentation/views/control_view.dart';
 import 'package:robotics_app/feature/data/presentation/views/data_view.dart';
@@ -7,7 +8,8 @@ import 'package:robotics_app/feature/home/presentation/view/widgets/card_widget.
 import 'package:robotics_app/feature/members/presentation/views/members_veiw.dart';
 
 class HomeViewBody extends StatefulWidget {
-  const HomeViewBody({super.key});
+  const HomeViewBody({super.key, required this.connection});
+  final BluetoothConnection connection;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -66,7 +68,9 @@ class _HomeViewBodyState extends State<HomeViewBody>
           builder: (context, child) {
             return ScaleTransition(
               scale: _scaleAnimation,
-              child: CardWidget(card: cards[index]),
+              child: CardWidget(
+                connection: widget.connection,
+                card: cards[index]),
             );
           },
         );

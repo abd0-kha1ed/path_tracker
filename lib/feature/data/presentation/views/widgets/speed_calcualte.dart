@@ -4,7 +4,7 @@ import 'package:robotics_app/constant.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class SpeedometerPage extends StatefulWidget {
-  const SpeedometerPage({Key? key}) : super(key: key);
+  const SpeedometerPage({super.key});
 
   @override
   _SpeedometerPageState createState() => _SpeedometerPageState();
