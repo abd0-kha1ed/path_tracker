@@ -15,7 +15,6 @@ class _SpeedometerPageState extends State<SpeedometerPage> {
   BluetoothConnection? connection;
   bool isRobotMoving = false;
 
-  // Simulate Bluetooth connection and data reading
   BluetoothConnection? robotConnection;
 
   @override
@@ -24,23 +23,30 @@ class _SpeedometerPageState extends State<SpeedometerPage> {
     connectToRobot();
   }
 
-  // Simulate Bluetooth connection and getting real-time speed data
+  // Connect to the robot and start receiving speed data
   Future<void> connectToRobot() async {
     try {
-      // Replace this with your robot's Bluetooth address
-      String robotAddress = hc05Address; // Example address
-      robotConnection = await BluetoothConnection.toAddress(robotAddress);
-      print("Connected to the robot");
+      // // Replace this with your robot's Bluetooth address
+      // String robotAddress = hc05Address; // Example address
+      // robotConnection = await BluetoothConnection.toAddress(robotAddress);
+      // print("Connected to the robot");
 
       // Listen to the incoming data from the robot
       robotConnection!.input!.listen((data) {
         String message = String.fromCharCodes(data);
-        double newSpeed =
-            double.parse(message); // Assuming robot sends speed as a string
-        updateSpeed(newSpeed);
+
+        // Split the incoming message assuming the format "distance,time"
+        List<String> dataParts = message.split(",");
+        if (dataParts.length == 2) {
+          double distance = double.parse(dataParts[0]); // Distance in cm
+          double time = double.parse(dataParts[1]); // Time in seconds
+
+          // Calculate speed (speed = distance / time)
+          double calculatedSpeed = distance / time; // Speed in cm/s
+          updateSpeed(calculatedSpeed);
+        }
       });
 
-      // Mark the robot as moving after connection
       setState(() {
         isRobotMoving = true;
       });
@@ -90,28 +96,29 @@ class _SpeedometerPageState extends State<SpeedometerPage> {
                 GaugeRange(
                   startValue: 0,
                   endValue: 30,
-                  color: Colors.green, // White color range for 0 to 50
+                  color: Colors.green, // Green color for 0 to 30 cm/s
                   startWidth: 10,
                   endWidth: 10,
                 ),
                 GaugeRange(
                   startValue: 30,
                   endValue: 60,
-                  color: Colors.orange, // White color range for 50 to 80
+                  color: Colors.orange, // Orange color for 30 to 60 cm/s
                   startWidth: 10,
                   endWidth: 10,
                 ),
                 GaugeRange(
                   startValue: 60,
                   endValue: 70,
-                  color: Colors.deepOrange, // White color range for 50 to 80
+                  color:
+                      Colors.deepOrange, // Deep orange color for 60 to 70 cm/s
                   startWidth: 10,
                   endWidth: 10,
                 ),
                 GaugeRange(
                   startValue: 70,
                   endValue: 100,
-                  color: Colors.red, // White color range for 80 to 100
+                  color: Colors.red, // Red color for 70 to 100 cm/s
                   startWidth: 10,
                   endWidth: 10,
                 ),
@@ -122,7 +129,7 @@ class _SpeedometerPageState extends State<SpeedometerPage> {
         const SizedBox(height: 20),
         // Display the current speed below the gauge
         Text(
-          "${speed.toStringAsFixed(2)} cm/s",
+          "${speed.toStringAsFixed(2)} cm/s", // Display speed in cm/s
           style: const TextStyle(
               fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
         ),
