@@ -8,8 +8,6 @@ import 'package:robotics_app/feature/home/presentation/view/widgets/home_view_bo
 class HomeView extends StatelessWidget {
   static const routeName = '/homePage';
   const HomeView({super.key});
-  
-  
 
   @override
 Widget build(BuildContext context) {
