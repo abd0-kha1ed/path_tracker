@@ -63,8 +63,15 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
           containerColor = Colors.greenAccent;
           // Change color when connected
           _pulseController.stop();
-          Navigator.pushReplacementNamed(context, HomeView.routeName,
-          arguments: context.read<BluetoothCubit>().connection); 
+          final connection = context.read<BluetoothCubit>().connection;
+          if (connection != null) {
+            Navigator.pushReplacementNamed(
+              context,
+              HomeView.routeName,
+              arguments: connection,
+            );
+          }
+
           // Stop pulse animation
         } else if (state is BluetoothError) {
           displayText = "Connection Failed ";
