@@ -2,14 +2,15 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.icon, required this.text});
+  const CustomAppBar({super.key, required this.icon, required this.text, this.automaticallyImplyLeading=false});
   final IconData icon;
   final String text;
+  final bool? automaticallyImplyLeading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: automaticallyImplyLeading!,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
