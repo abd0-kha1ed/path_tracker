@@ -25,16 +25,31 @@ class DistanceCard extends StatelessWidget {
       duration: const Duration(milliseconds: 500),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withOpacity(0.05),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: color, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Distance",
-              style: TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.bold, color: color)),
+          Row(
+            children: [
+              Icon(Icons.sensor_door, color: color),
+              const SizedBox(width: 8),
+              Text(
+                "Distance",
+                style: TextStyle(
+                    fontSize: 18, fontWeight: FontWeight.bold, color: color),
+              ),
+            ],
+          ),
           const SizedBox(height: 10),
           TweenAnimationBuilder(
             tween: Tween<double>(begin: 0, end: distance),
@@ -66,6 +81,10 @@ class DistanceCard extends StatelessWidget {
                     color: color,
                     barWidth: 3,
                     dotData: FlDotData(show: false),
+                    belowBarData: BarAreaData(
+                      show: true,
+                      color: color.withOpacity(0.2),
+                    ),
                   )
                 ],
               ),
