@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // For formatting date and time
 
 class TimeTrackingPage extends StatefulWidget {
-  const TimeTrackingPage({Key? key}) : super(key: key);
+  const TimeTrackingPage({super.key});
 
   @override
   _TimeTrackingPageState createState() => _TimeTrackingPageState();

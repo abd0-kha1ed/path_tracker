@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:robotics_app/constant.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class SpeedometerPage extends StatefulWidget {

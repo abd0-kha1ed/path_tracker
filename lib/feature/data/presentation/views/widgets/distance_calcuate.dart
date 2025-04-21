@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart'; // Bluetooth package for communication
 import 'dart:async';
 
-import 'package:robotics_app/constant.dart';
 
 class DistanceCalcute extends StatefulWidget {
   const DistanceCalcute({super.key});

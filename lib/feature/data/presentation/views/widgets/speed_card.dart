@@ -6,10 +6,10 @@ class SpeedCard extends StatefulWidget {
   final bool isRunning;
 
   const SpeedCard({
-    Key? key,
+    super.key,
     required this.speed,
     required this.isRunning,
-  }) : super(key: key);
+  });
 
   @override
   State<SpeedCard> createState() => _SpeedCardState();
@@ -43,42 +43,48 @@ class _SpeedCardState extends State<SpeedCard> {
     Color color = widget.isRunning ? Colors.green : Colors.red;
 
     return AnimatedContainer(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: .1),
+        color: color.withOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: color),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Speed',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+          Row(
+            children: [
+              Icon(Icons.speed, color: color),
+              const SizedBox(width: 8),
+              Text(
+                'Speed',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: displayedSpeed,
               end: widget.speed,
             ),
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             builder: (context, value, _) => Text(
               '${value.toStringAsFixed(1)} cm/s',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 28,
                 color: color,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           SizedBox(
             height: 100,
             child: LineChart(
@@ -93,6 +99,10 @@ class _SpeedCardState extends State<SpeedCard> {
                     dotData: FlDotData(show: false),
                     color: color,
                     barWidth: 3,
+                    belowBarData: BarAreaData(
+                      show: true,
+                      color: color.withOpacity(0.2),
+                    ),
                   ),
                 ],
               ),
