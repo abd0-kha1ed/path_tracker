@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robotics_app/core/helper/on_generate_routes.dart';
 import 'package:robotics_app/feature/connection/presentation/manager/cubit/bluetooth_cubit.dart';
 import 'package:robotics_app/feature/data/presentation/manger/cubit/robot_data_cubit.dart';
-import 'package:robotics_app/feature/data/presentation/views/data_view.dart';
+import 'package:robotics_app/feature/members/presentation/views/members_veiw.dart';
 
 void main() {
   runApp(RoboticsApp());
-  
 }
 
 class RoboticsApp extends StatelessWidget {
@@ -17,11 +16,11 @@ class RoboticsApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => BluetoothCubit()),
-        BlocProvider(create: (_) => RobotDataCubit()), 
+        BlocProvider(create: (_) => RobotDataCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: DataView.routeName,
+        initialRoute: MembersView.routeName,
         onGenerateRoute: onGenerateRoutes,
       ),
     );
