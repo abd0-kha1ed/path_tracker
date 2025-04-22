@@ -76,14 +76,15 @@ class _MembersViewBodyState extends State<MembersViewBody>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
           child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             itemCount: widget.cards.length,
             itemBuilder: (context, index) {
               if (index >= _animations.length) {
-                // fallback to empty if animation not ready
                 return const SizedBox.shrink();
               }
 
@@ -92,6 +93,46 @@ class _MembersViewBodyState extends State<MembersViewBody>
                 cardModel: widget.cards[index],
               );
             },
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade50,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.person_pin,
+                      color: Colors.blueGrey,
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Supervisor: Dr. Khaled Youssef",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            color: Colors.blueGrey[800],
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ],

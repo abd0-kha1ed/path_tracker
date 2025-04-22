@@ -8,7 +8,11 @@ class MembersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(icon: Icons.group, text: "Members"),
+      appBar: CustomAppBar(
+        icon: Icons.group,
+        text: "Members",
+        automaticallyImplyLeading: true,
+      ),
       body: MembersViewBody(),
     );
   }
