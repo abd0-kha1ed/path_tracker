@@ -38,11 +38,12 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   google_fonts: ^6.2.1
   permission_handler: ^12.0.0+1
+  rename_app: ^1.6.3
   syncfusion_flutter_gauges: ^29.1.38
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.14.3
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
 
