@@ -1,5 +1,10 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:robotics_app/feature/data/presentation/manger/cubit/robot_data_cubit.dart';
 import 'package:robotics_app/feature/home/presentation/view/home_view.dart';
 import '../../manager/cubit/bluetooth_cubit.dart';
 
@@ -58,22 +63,35 @@ class _BluetoothConnectViewBodyState extends State<BluetoothConnectViewBody>
           containerColor = Colors.orangeAccent; // Chang color during connecting
           _pulseController.forward(); // Start pulse animation
         } else if (state is BluetoothConnected) {
-          displayText = "Connected ";
-          isConnecting = false;
-          containerColor = Colors.greenAccent;
-          // Change color when connected
-          _pulseController.stop();
-          final connection = context.read<BluetoothCubit>().connection;
-          if (connection != null) {
-            Navigator.pushReplacementNamed(
-              context,
-              HomeView.routeName,
-              arguments: connection,
-            );
-          }
+  displayText = "Connected ";
+  isConnecting = false;
+  containerColor = Colors.greenAccent;
+  _pulseController.stop();
 
-          // Stop pulse animation
-        } else if (state is BluetoothError) {
+  final connection = context.read<BluetoothCubit>().connection;
+  final dataCubit = context.read<RobotDataCubit>();
+
+  if (connection != null) {
+    // ✅ اسمع البيانات من البلوتوث وسلمها لـ DataCubit
+    connection.input!
+  .transform(StreamTransformer<Uint8List, String>.fromBind(utf8.decoder.bind))
+  .transform(const LineSplitter())
+  .listen((rawData) {
+    dataCubit.updateFromRaw(rawData);
+  });
+
+
+    // ✅ روح لصفحة Home بعد بدء الاستماع
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushReplacementNamed(
+        context,
+        HomeView.routeName,
+        arguments: connection,
+      );
+    });
+  }
+}
+ else if (state is BluetoothError) {
           displayText = "Connection Failed ";
           isConnecting = false;
           containerColor = Colors.redAccent; // Change color on error

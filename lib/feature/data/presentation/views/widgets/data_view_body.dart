@@ -15,50 +15,56 @@ class DataViewBody extends StatefulWidget {
 }
 
 class _DataViewBodyState extends State<DataViewBody> {
-  List<double> _distanceHistory = [];
-  List<double> _speedHistory = [];
+  final List<double> _distanceHistory = [];
+  final List<double> _speedHistory = [];
 
   @override
   void didUpdateWidget(covariant DataViewBody oldWidget) {
     super.didUpdateWidget(oldWidget);
+
     if (widget.data.distanceFromObstacle != oldWidget.data.distanceFromObstacle) {
       _distanceHistory.add(widget.data.distanceFromObstacle);
       if (_distanceHistory.length > 20) _distanceHistory.removeAt(0);
     }
 
-    double avgSpeed = (widget.data.leftMotorSpeed + widget.data.rightMotorSpeed) / 2;
-    if (_speedHistory.isEmpty || avgSpeed != _speedHistory.last) {
-      _speedHistory.add(avgSpeed);
+    if (_speedHistory.isEmpty || widget.data.speed != _speedHistory.last) {
+      _speedHistory.add(widget.data.speed);
       if (_speedHistory.length > 20) _speedHistory.removeAt(0);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final averageSpeed = (widget.data.leftMotorSpeed + widget.data.rightMotorSpeed) / 2;
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          RobotStatusCard(isRunning: widget.data.isRunning),
+          RobotStatusCard(
+            isRunning: widget.data.isRunning,
+            isReversing: widget.data.isReversing,
+            isFinished: widget.data.isFinished,
+          ),
           const SizedBox(height: 16),
-          SpeedCard(speed: averageSpeed, isRunning: widget.data.isRunning),
+
+          SpeedCard(
+            speed: widget.data.speed,
+            isRunning: widget.data.isRunning,
+          ),
           const SizedBox(height: 16),
+
           DistanceCard(
             distance: widget.data.distanceFromObstacle,
             distanceHistory: _distanceHistory,
           ),
           const SizedBox(height: 16),
-          TimeCard(seconds: widget.data.isRunning ? _calculateElapsedTime() : 0),
+
+          TimeCard(
+            seconds: widget.data.timeToGoal.toInt(),
+            isReversing: widget.data.isReversing,
+            isFinished: widget.data.isFinished,
+          ),
         ],
       ),
     );
-  }
-
-  // هنا بنحسب الوقت ببساطة، لو حابب تخزن التوقيت بدقة ممكن نخليها DateTime
-  int _calculateElapsedTime() {
-    // مجرد قيمة عشوائية، لكن تقدر تعدلها حسب الوقت الفعلي
-    return DateTime.now().second + (DateTime.now().minute * 60);
   }
 }

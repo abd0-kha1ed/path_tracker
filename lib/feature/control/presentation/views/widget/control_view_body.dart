@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robotics_app/feature/control/presentation/views/widget/status_indicator.dart';
+import 'package:robotics_app/feature/data/presentation/views/data_view.dart';
 import '../manager/cubit/control_cubit.dart';
 import '../manager/cubit/control_state.dart';
-
 
 class ControlViewBody extends StatelessWidget {
   const ControlViewBody({super.key});
@@ -17,7 +17,7 @@ class ControlViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // 🟢 Connection + Robot Status
+              // ✅ Status Indicators - Styled
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -33,40 +33,31 @@ class ControlViewBody extends StatelessWidget {
               ),
               const SizedBox(height: 32),
 
-              // 🔘 Start / Stop Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      context.read<ControlCubit>().startRobot();
-                    },
-                    icon: const Icon(Icons.play_arrow),
-                    label: const Text("Start"),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      context.read<ControlCubit>().stopRobot();
-                    },
-                    icon: const Icon(Icons.stop),
-                    label: const Text("Stop"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // 🔁 Reverse Navigation
+              // ▶ Start Button
               ElevatedButton.icon(
                 onPressed: () {
-                  context.read<ControlCubit>().reverseRobot();
+                  context.read<ControlCubit>().startRobot();
                 },
-                icon: const Icon(Icons.loop),
-                label: const Text("Reverse Navigation"),
+                icon: const Icon(Icons.play_arrow),
+                label: const Text("Start Robot"),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              // 📊 Navigate to Data Page
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, DataView.routeName);
+                },
+                icon: const Icon(Icons.bar_chart),
+                label: const Text("View Data"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+                  textStyle: const TextStyle(fontSize: 18),
                 ),
               ),
             ],
@@ -76,4 +67,3 @@ class ControlViewBody extends StatelessWidget {
     );
   }
 }
-

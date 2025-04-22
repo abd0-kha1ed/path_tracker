@@ -2,14 +2,35 @@ import 'package:flutter/material.dart';
 
 class RobotStatusCard extends StatelessWidget {
   final bool isRunning;
+  final bool isReversing;
+  final bool isFinished;
 
-  const RobotStatusCard({super.key, required this.isRunning});
+  const RobotStatusCard({
+    super.key,
+    required this.isRunning,
+    required this.isReversing,
+    required this.isFinished,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Color color = isRunning ? Colors.green : Colors.red;
-    String statusText = isRunning ? 'Running' : 'Stopped';
-    IconData icon = isRunning ? Icons.play_arrow : Icons.stop;
+    String statusText = "Stopped";
+    Color color = Colors.red;
+    IconData icon = Icons.stop;
+
+    if (isFinished) {
+      statusText = "Finished";
+      color = Colors.blueGrey;
+      icon = Icons.flag;
+    } else if (isReversing) {
+      statusText = "Reversing";
+      color = Colors.orange;
+      icon = Icons.rotate_left;
+    } else if (isRunning) {
+      statusText = "Running";
+      color = Colors.green;
+      icon = Icons.play_arrow;
+    }
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),

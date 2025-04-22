@@ -24,17 +24,7 @@ class ControlCubit extends Cubit<ControlState> {
   }
 
   void startRobot() {
-    _sendCommand("START");
+    _sendCommand("START\n");
     emit(state.copyWith(isRobotRunning: true));
-  }
-
-  void stopRobot() {
-    _sendCommand("STOP");
-    emit(state.copyWith(isRobotRunning: false));
-  }
-
-  void reverseRobot() {
-    _sendCommand("REVERSE");
-    emit(state.copyWith(isRobotRunning: true)); 
   }
 }
