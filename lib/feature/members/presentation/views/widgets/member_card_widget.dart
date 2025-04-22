@@ -18,7 +18,7 @@ class MemberCardWidget extends StatelessWidget {
           begin: const Offset(1, 0),
           end: Offset.zero,
         ).animate(CurvedAnimation(
-          parent: animation as Animation<double>,
+          parent: animation,
           curve: Curves.easeOutBack,
         )),
         child: Container(

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robotics_app/core/helper/on_generate_routes.dart';
 import 'package:robotics_app/feature/connection/presentation/manager/cubit/bluetooth_cubit.dart';
 import 'package:robotics_app/feature/data/presentation/manger/cubit/robot_data_cubit.dart';
-import 'package:robotics_app/feature/members/presentation/views/members_veiw.dart';
+import 'package:robotics_app/feature/spalsh/presentation/view/splash_view.dart';
 
 void main() {
   runApp(RoboticsApp());
@@ -20,7 +20,7 @@ class RoboticsApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: MembersView.routeName,
+        initialRoute: SplashView.routeName,
         onGenerateRoute: onGenerateRoutes,
       ),
     );
