@@ -17,7 +17,7 @@ class BluetoothCubit extends Cubit<BluetoothState> {
 
   emit(BluetoothConnecting());
   print("Trying to connect to $hc05Address...");
-
+ 
   try {
     _connection = await BluetoothConnection.toAddress(hc05Address);
     print("Connected to ${_connection!.isConnected}");
